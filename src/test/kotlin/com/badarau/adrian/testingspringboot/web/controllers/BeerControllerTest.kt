@@ -16,6 +16,9 @@ import org.mockito.InjectMocks
 import org.mockito.Mock
 import org.mockito.Mockito.reset
 import org.mockito.junit.jupiter.MockitoExtension
+import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
+import org.springframework.boot.test.mock.mockito.MockBean
 import org.springframework.http.MediaType
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders
@@ -26,15 +29,13 @@ import java.math.BigDecimal
 import java.time.OffsetDateTime
 import java.util.*
 
-@ExtendWith(MockitoExtension::class)
+@WebMvcTest(BeerController::class)
 internal class BeerControllerTest {
 
-    @Mock
+    @MockBean
     lateinit var beerService: BeerService
 
-    @InjectMocks
-    lateinit var beerController: BeerController
-
+    @Autowired
     lateinit var mockMvc: MockMvc
 
     private val validBeer: BeerDto = BeerDto(
@@ -51,7 +52,6 @@ internal class BeerControllerTest {
 
     @BeforeEach
     internal fun setUp() {
-        mockMvc = MockMvcBuilders.standaloneSetup(beerController).build()
     }
 
     @AfterEach
