@@ -57,5 +57,6 @@ internal class BeerControllerTest {
         mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/beer/${validBeer.id}")).andExpect(status().isOk)
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8))
                 .andExpect(jsonPath("$.id", `is`(validBeer.id.toString())))
+                .andExpect(jsonPath("$.beerName", `is`("Valid Test BREW")))
     }
 }
